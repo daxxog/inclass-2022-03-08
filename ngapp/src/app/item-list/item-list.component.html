@@ -1,1 +1,12 @@
-<p>item-list works!</p>
+<label for="name">Name:</label>
+<input name="name" id="name" #newName>
+<button (click)="addItem(newName.value)">
+    Submit Item name
+</button>
+
+<ul>
+    <li *ngFor="let item of itemsList">
+        Hello {{ item }}
+        <app-item [item]="item"></app-item>
+    </li>
+</ul>

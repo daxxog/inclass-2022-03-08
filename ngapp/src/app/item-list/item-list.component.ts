@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Item } from '../item/item.model'
+import { ItemComponent } from '../item/item.component'
 
 @Component({
   selector: 'app-item-list',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ItemListComponent implements OnInit {
 
-  constructor() { }
+    items: string[] = [];
+    itemsList: Item[] = [];
+    @ViewChild(ItemComponent) itemComponent !: ItemComponent;
 
-  ngOnInit(): void {
-  }
+    constructor() {
+        this.items = ['Books', 'Gloves', 'Hat', 'Jacket'];
+        this.itemsList = this.items.map(v => new Item(v));
+    }
+
+    addItem(itemName: string) {
+        this.itemsList.push(new Item(itemName));
+    }
+
+    greetings():string {
+        return this.itemComponent.greetings();
+    }
+
+    ngOnInit(): void {
+    }
 
 }
